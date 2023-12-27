@@ -1,0 +1,5 @@
+JWT/Login:
+    - Check username, password in post(login) request
+    - If exists create new JWT
+    - Send back to user
+    - Setup auth so only the req with JWT can acess the dashboard
