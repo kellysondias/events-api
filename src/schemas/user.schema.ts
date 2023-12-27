@@ -1,5 +1,5 @@
 import Joi from "joi";
-import mongoose, { Schema } from "mongoose";
+import { Schema } from "mongoose";
 
 const signInValidationSchema = Joi.object({
 	firstName: Joi.string().required().messages({
@@ -76,6 +76,4 @@ const userSchema = new Schema({
 	},
 });
 
-const UserModel = mongoose.model("User", userSchema);
-
-export { signInValidationSchema, UserModel };
+export { signInValidationSchema, userSchema };
