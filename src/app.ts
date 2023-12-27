@@ -1,11 +1,30 @@
+import express, { Express, Router } from "express";
 import "express-async-errors";
-import express from "express";
 import "dotenv/config";
-import userRouter from "./routes/user.route";
+//import userRouter from "./routes/user.route";
 
-const app = express();
+class App {
+	private expressApp: Express;
 
-app.use(express.json());
-app.use("/api/v1", userRouter);
+	constructor() {
+		this.expressApp = express();
+		this.config();
+		this.routes();
+	}
 
-export default app;
+	private config() {
+		this.expressApp.use(express.json());
+	}
+
+	private routes() {
+		const router = Router();
+		//router.use("/api/v1", userRouter);
+		this.expressApp.use(router);
+	}
+
+	public getExpressApp(): Express {
+		return this.expressApp;
+	}
+}
+
+export default new App().getExpressApp();
