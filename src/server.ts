@@ -1,29 +1,17 @@
 import app from "./app";
 import { connectDB } from "./database/connect.database";
 
-class Server {
-	private readonly port: number;
+const port = process.env.PORT || 3000;
 
-	constructor() {
-		this.port = +process.env.PORT! ?? 3000;
+const start = async () => {
+	try {
+		await connectDB(`${process.env.MONGO_URI}`);
+		app.listen(port, () =>
+			console.log(`Server listening on port ${port}...`),
+		);
+	} catch (error) {
+		console.log(error);
 	}
+};
 
-	async start() {
-		try {
-			await connectDB(`${process.env.MONGO_URI}`);
-			app.listen(this.port, () =>
-				console.log(
-					`Server listening on port ${this.port}...`,
-				),
-			);
-		} catch (error) {
-			console.log(error);
-		}
-	}
-
-	public static bootstrap(): Server {
-		return new Server();
-	}
-}
-
-Server.bootstrap().start();
+start();
