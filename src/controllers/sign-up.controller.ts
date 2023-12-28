@@ -2,24 +2,30 @@ import { Request, Response } from "express";
 import { StatusCodes } from "http-status-codes";
 import { signInValidationSchema } from "../schemas/user.schema";
 import Joi from "joi";
+import { showValidationError } from "../utils/showValidationError";
 
 const validateAndRespond = (
 	data: Request,
 	schema: Joi.ObjectSchema,
 	res: Response,
 ) => {
-	const validationResult = schema.validate(data);
+	const validationResult = schema.validate(data, {
+		abortEarly: false,
+	});
+
+	console.log(validationResult.error!.details);
 
 	if (validationResult.error) {
-		const validationErrors = validationResult.error.details.map(
-			(err) => err.message,
-		);
-		return res
-			.status(StatusCodes.BAD_REQUEST)
-			.json({ error: validationErrors });
+		showValidationError(validationResult, res);
+		// const validationErrors = validationResult.error.details.map(
+		// 	(err) => err.message,
+		// );
+		// return res
+		// 	.status(StatusCodes.BAD_REQUEST)
+		// 	.json({ error: validationErrors });
 	}
 
-	return;
+	return null;
 };
 
 export const signUp = async (req: Request, res: Response) => {
