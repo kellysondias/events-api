@@ -3,7 +3,7 @@ import { StatusCodes } from "http-status-codes";
 import { signInValidationSchema } from "../schemas/user.schema";
 import { UserModel } from "../models/user.model";
 import { hash } from "bcrypt";
-import { validateAndRespond } from "../utils/validateAndRespond";
+import { validateAndRespond } from "../utils/validateAndRespond/validateAndRespond";
 
 export const signUp = async (req: Request, res: Response) => {
 	try {
