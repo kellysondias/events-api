@@ -25,7 +25,7 @@ const signInValidationSchema = Joi.object({
 	email: Joi.string().email().required().messages({
 		"any.required": "Email is required.",
 		"string.empty": "Email cannot be empty.",
-		"string.email": "Invalid email address.",
+		"string.email": "Invalid email.",
 	}),
 	password: Joi.string().required().messages({
 		"any.required": "Password is required.",
