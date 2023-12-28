@@ -15,15 +15,8 @@ const validateAndRespond = (
 
 	console.log(validationResult.error!.details);
 
-	if (validationResult.error) {
+	if (validationResult.error)
 		showValidationError(validationResult, res);
-		// const validationErrors = validationResult.error.details.map(
-		// 	(err) => err.message,
-		// );
-		// return res
-		// 	.status(StatusCodes.BAD_REQUEST)
-		// 	.json({ error: validationErrors });
-	}
 
 	return null;
 };
