@@ -1,7 +1,7 @@
 import Joi from "joi";
 import { Schema } from "mongoose";
 
-const signInValidationSchema = Joi.object({
+const signUpValidationSchema = Joi.object({
 	firstName: Joi.string().required().messages({
 		"any.required": "First name is required.",
 		"string.empty": "First name cannot be empty.",
@@ -40,6 +40,18 @@ const signInValidationSchema = Joi.object({
 		}),
 });
 
+const signInValidationSchema = Joi.object({
+	email: Joi.string().email().required().messages({
+		"any.required": "Email is required.",
+		"string.empty": "Email cannot be empty.",
+		"string.email": "Invalid email.",
+	}),
+	password: Joi.string().required().messages({
+		"any.required": "Password is required.",
+		"string.empty": "Password cannot be empty.",
+	}),
+});
+
 const userSchema = new Schema({
 	firstName: {
 		type: String,
@@ -76,4 +88,4 @@ const userSchema = new Schema({
 	},
 });
 
-export { signInValidationSchema, userSchema };
+export { signUpValidationSchema, signInValidationSchema, userSchema };

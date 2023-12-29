@@ -5,8 +5,8 @@ import { ValidationResult } from "../../types/validationResult";
 export const showValidationError = (
 	validationResult: ValidationResult,
 	res: Response,
-) =>
-	res.status(StatusCodes.BAD_REQUEST).json({
+) => {
+	return res.status(StatusCodes.BAD_REQUEST).json({
 		type: "Validation error",
 		errors: validationResult.error.details.map((error) => {
 			return {
@@ -15,3 +15,4 @@ export const showValidationError = (
 			};
 		}),
 	});
+};

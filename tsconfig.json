@@ -1,14 +1,17 @@
 {
-  "compilerOptions": {
-    "target": "es2018",
-    "experimentalDecorators": true,
-    "module": "commonjs",
-    "moduleResolution": "node10",
-    "resolveJsonModule": true,
-    "outDir": "./dist",
-    "removeComments": true,
-    "esModuleInterop": true,
-    "forceConsistentCasingInFileNames": true,
-    "strict": true
-  }
+	"compilerOptions": {
+		"target": "es2018",
+		"experimentalDecorators": true,
+		"module": "commonjs",
+		"moduleResolution": "node10",
+		"resolveJsonModule": true,
+    "rootDir": "./src",
+		"outDir": "./dist",
+		"removeComments": true,
+		"esModuleInterop": true,
+		"forceConsistentCasingInFileNames": true,
+		"strict": true,
+    "noEmit": true,
+		"allowImportingTsExtensions": true
+	}
 }
