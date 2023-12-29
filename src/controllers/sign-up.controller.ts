@@ -1,15 +1,16 @@
 import { Request, Response } from "express";
 import { StatusCodes } from "http-status-codes";
-import { signInValidationSchema } from "../schemas/user.schema";
+import { signUpValidationSchema } from "../schemas/user.schema";
 import { UserModel } from "../models/user.model";
 import { hash } from "bcrypt";
-import { validateAndRespond } from "../utils/validateAndRespond/validateAndRespond";
+import { validateAndRespond } from "../utils/validateAndRespond/validateAndRespond.ts";
+import { internalServerErrorMessage } from "../utils/internalServerErrorMessage";
 
 export const signUp = async (req: Request, res: Response) => {
 	try {
 		const validationError = validateAndRespond(
 			req.body,
-			signInValidationSchema,
+			signUpValidationSchema,
 			res,
 		);
 
@@ -22,11 +23,9 @@ export const signUp = async (req: Request, res: Response) => {
 
 		await UserModel.create(req.body);
 
-		return res.status(StatusCodes.CREATED).json({
-			success: true,
-			message: "User created",
-		});
-	} catch (error) {
-		throw new Error(String(error));
+		return res.status(StatusCodes.CREATED).send("User created");
+	} catch (e) {
+		console.log(e);
+		internalServerErrorMessage(res);
 	}
 };
