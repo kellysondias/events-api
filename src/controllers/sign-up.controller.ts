@@ -4,7 +4,7 @@ import { signUpValidationSchema } from "../schemas/user.schema";
 import { UserModel } from "../models/user.model";
 import { hash } from "bcrypt";
 import { validateAndRespond } from "../utils/validateAndRespond/validateAndRespond.ts";
-import { internalServerErrorMessage } from "../utils/internalServerErrorMessage";
+//import { internalServerErrorMessage } from "../utils/internalServerErrorMessage";
 
 export const signUp = async (req: Request, res: Response) => {
 	try {
@@ -24,8 +24,7 @@ export const signUp = async (req: Request, res: Response) => {
 		await UserModel.create(req.body);
 
 		return res.status(StatusCodes.CREATED).send("User created");
-	} catch (e) {
-		console.log(e);
-		internalServerErrorMessage(res);
+	} catch (error) {
+		console.log(error)
 	}
 };
