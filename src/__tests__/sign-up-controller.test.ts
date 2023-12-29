@@ -1,3 +1,4 @@
+
 import { Request, Response } from "express";
 import { StatusCodes } from "http-status-codes";
 import { signUp } from "../controllers/sign-up.controller";
@@ -106,3 +107,4 @@ describe("signUp()", () => {
 		await expect(signUp(req, res)).rejects.toThrow("DB error");
 	});
 });
+
