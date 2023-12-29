@@ -1,15 +1,15 @@
 import { Request, Response } from "express";
 import { StatusCodes } from "http-status-codes";
-import { signUp } from "../src/controllers/sign-up.controller";
-import { UserModel } from "../src/models/user.model";
+import { signUp } from "../controllers/sign-up.controller";
+import { UserModel } from "../models/user.model";
 import { hash } from "bcrypt";
-import { validateAndRespond } from "../src/utils/validateAndRespond/validateAndRespond";
-import { signInValidationSchema } from "../src/schemas/user.schema";
+import { validateAndRespond } from "../utils/validateAndRespond/validateAndRespond";
+import { signInValidationSchema } from "../schemas/user.schema";
 
 jest.mock("bcrypt");
-jest.mock("../src/utils/validateAndRespond/validateAndRespond.ts");
-jest.mock("../src/schemas/user.schema");
-jest.mock("../src/models/user.model");
+jest.mock("../utils/validateAndRespond/index.ts");
+jest.mock("../schemas/user.schema");
+jest.mock("../models/user.model");
 jest.mock("express");
 
 describe("signUp()", () => {
