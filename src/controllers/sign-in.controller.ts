@@ -19,17 +19,43 @@ export const signIn = async (req: Request, res: Response) => {
 		if (validationError) return validationError;
 
 		const { email, password } = req.body;
-		const user = await UserModel.findOne({ email, password });
+
+		const user = await UserModel.findOne({ email });
+
+		if (!user) {
+			return res.status(StatusCodes.BAD_REQUEST).json({
+				type: "Validation Error",
+				errors: [
+					{
+						resource: "email",
+						message: "invalid email or password",
+					},
+				],
+			});
+		}
+
+		if (!user.email) {
+			return res.status(StatusCodes.BAD_REQUEST).json({
+				type: "Validation Error",
+				errors: [
+					{
+						resource: "email",
+						message: "invalid email",
+					},
+				],
+			});
+		}
+
 		const passwordMatch = await compare(
 			password,
 			(user as IUser).password,
 		);
 
-		if (!user || !passwordMatch) {
+		if (!passwordMatch) {
 			return res.status(StatusCodes.UNAUTHORIZED).json({
 				statusCode: 401,
 				error: "Unauthorized",
-				message: "Invalid email or password",
+				message: "invalid password",
 			});
 		}
 
@@ -40,8 +66,7 @@ export const signIn = async (req: Request, res: Response) => {
 		);
 
 		res.status(StatusCodes.CREATED).json({ token });
-	} catch (e) {
-		console.log(e);
-		internalServerErrorMessage(res);
+	} catch (error) {
+		internalServerErrorMessage(error, res);
 	}
 };

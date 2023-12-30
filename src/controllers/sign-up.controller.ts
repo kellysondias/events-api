@@ -3,7 +3,7 @@ import { StatusCodes } from "http-status-codes";
 import { signUpValidationSchema } from "../schemas/user.schema";
 import { UserModel } from "../models/user.model";
 import { hash } from "bcrypt";
-import { validateAndRespond } from "../utils/validateAndRespond/validateAndRespond.ts";
+import { validateAndRespond } from "../utils/validateAndRespond/validateAndRespond";
 import { internalServerErrorMessage } from "../utils/internalServerErrorMessage";
 
 export const signUp = async (req: Request, res: Response) => {
@@ -16,6 +16,16 @@ export const signUp = async (req: Request, res: Response) => {
 
 		if (validationError) return validationError;
 
+		const { email } = req.body;
+
+		const userExists = Boolean(await UserModel.findOne({ email }))
+
+		if (userExists) {
+			return res
+				.status(StatusCodes.BAD_REQUEST)
+				.send("An user with this email already exists");
+		}
+
 		const { password } = req.body;
 		const saltRounds = 10;
 		const hashedPassword = await hash(password, saltRounds);
@@ -24,8 +34,7 @@ export const signUp = async (req: Request, res: Response) => {
 		await UserModel.create(req.body);
 
 		return res.status(StatusCodes.CREATED).send("User created");
-	} catch (e) {
-		console.log(e);
-		internalServerErrorMessage(res);
+	} catch (error) {
+		internalServerErrorMessage(error, res);
 	}
 };

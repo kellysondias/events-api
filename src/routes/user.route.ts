@@ -4,7 +4,7 @@ import { signIn } from "../controllers/sign-in.controller";
 
 const userRouter = Router();
 
-userRouter.route("/sign-up").post(signUp);
-userRouter.route("/sign-in").post(signIn);
+userRouter.post("/sign-up", signUp);
+userRouter.post("/sign-in", signIn);
 
 export { userRouter };
