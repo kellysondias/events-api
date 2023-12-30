@@ -1,6 +1,16 @@
 import Joi from "joi";
 import { Schema } from "mongoose";
 
+const signInValidationSchema = Joi.object({
+	email: Joi.string().email().required().messages({
+		"string.empty": "Email cannot be empty.",
+		"string.email": "Invalid email.",
+	}),
+	password: Joi.string().required().messages({
+		"string.empty": "Password cannot be empty.",
+	}),
+});
+
 const signUpValidationSchema = Joi.object({
 	firstName: Joi.string().required().messages({
 		"any.required": "First name is required.",
@@ -27,10 +37,14 @@ const signUpValidationSchema = Joi.object({
 		"string.empty": "Email cannot be empty.",
 		"string.email": "Invalid email.",
 	}),
-	password: Joi.string().required().messages({
-		"any.required": "Password is required.",
-		"string.empty": "Password cannot be empty.",
-	}),
+	password: Joi.string()
+		.regex(/^(?=.*[A-Z])(?=.*\d).{6,}$/)
+		.required()
+		.messages({
+			"string.pattern.base":
+				"Password must contain at least one uppercase letter, six characters and one number",
+			"any.required": "Password is required",
+		}),
 	confirmPassword: Joi.string()
 		.valid(Joi.ref("password"))
 		.required()
@@ -38,18 +52,6 @@ const signUpValidationSchema = Joi.object({
 			"any.required": "Confirm password is required.",
 			"any.only": "Passwords do not match.",
 		}),
-});
-
-const signInValidationSchema = Joi.object({
-	email: Joi.string().email().required().messages({
-		"any.required": "Email is required.",
-		"string.empty": "Email cannot be empty.",
-		"string.email": "Invalid email.",
-	}),
-	password: Joi.string().required().messages({
-		"any.required": "Password is required.",
-		"string.empty": "Password cannot be empty.",
-	}),
 });
 
 const userSchema = new Schema({
