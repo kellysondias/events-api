@@ -1,12 +1,12 @@
 import { Request, Response } from "express";
 import { StatusCodes } from "http-status-codes";
-import { validateAndRespond } from "../utils/validateAndRespond/validateAndRespond";
-import { signInValidationSchema } from "../schemas/user.schema";
-import { UserModel } from "../models/user.model";
+import { validateAndRespond } from "../../utils/validateAndRespond/validateAndRespond";
+import { signInValidationSchema } from "../../schemas/user.schema";
+import { UserModel } from "../../models/user.model";
 import { sign } from "jsonwebtoken";
 import { compare } from "bcrypt";
-import { internalServerErrorMessage } from "../utils/internalServerErrorMessage";
-import IUser from "../interfaces/user.interface";
+import { internalServerErrorMessage } from "../../utils/internalServerErrorMessage";
+import IUser from "../../interfaces/user.interface";
 
 export const signIn = async (req: Request, res: Response) => {
 	try {

@@ -1,14 +1,14 @@
-
 import { Request, Response } from "express";
 import { StatusCodes } from "http-status-codes";
-import { signUp } from "../controllers/sign-up.controller";
+import { signUp } from "../controllers/auth/sign-up.controller";
 import { UserModel } from "../models/user.model";
 import { hash } from "bcrypt";
 import { validateAndRespond } from "../utils/validateAndRespond/validateAndRespond";
 import { signInValidationSchema } from "../schemas/user.schema";
 
 jest.mock("bcrypt");
-jest.mock("../utils/validateAndRespond/index.ts");
+jest.mock("../utils/validateAndRespond/validateAndRespond.ts");
+jest.mock("../utils/validateAndRespond/showValidationError.ts")
 jest.mock("../schemas/user.schema");
 jest.mock("../models/user.model");
 jest.mock("express");
@@ -107,4 +107,3 @@ describe("signUp()", () => {
 		await expect(signUp(req, res)).rejects.toThrow("DB error");
 	});
 });
-
