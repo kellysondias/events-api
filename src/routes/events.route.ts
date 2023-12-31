@@ -1,10 +1,11 @@
 import { Router } from "express";
+import { createEvent } from "../controllers/events/create-event.controller";
 
 const eventsRouter = Router();
 
 eventsRouter
 	.route("/events")
-	.post((_, res) => res.send("POST events route"))
+	.post(createEvent)
 	.get((_, res) => res.send("GET events route"))
 	.delete((_, res) => res.send("DELETE events route"));
 
