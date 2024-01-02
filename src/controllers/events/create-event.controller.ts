@@ -1,12 +1,12 @@
 import { Request, Response } from "express";
 import { StatusCodes } from "http-status-codes";
-import { internalServerErrorMessage } from "../../utils/internalServerErrorMessage";
+import { internalServerErrorMessage } from "../../utils/internal-server-error-message";
 import { unauthorizedRes } from "./unauthorized-res";
 import { verify } from "jsonwebtoken";
 import { UserModel } from "../../models/user.model";
 import { eventPayloadValidationSchema } from "../../schemas/event.schema";
 import { EventModel } from "../../models/event.model";
-import { validateAndRespond } from "../../utils/validateAndRespond/validateAndRespond";
+import { validateAndRespond } from "../../utils/validate-and-respond/validate-and-respond";
 
 export const createEvent = async (req: Request, res: Response) => {
 	try {
