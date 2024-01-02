@@ -1,5 +1,5 @@
 import Joi from "joi";
-import { showValidationError } from "./showValidationError";
+import { showValidationError } from "./show-validation-error";
 import { Response } from "express";
 
 export const validateAndRespond = (

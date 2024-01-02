@@ -1,6 +1,6 @@
 import { StatusCodes } from "http-status-codes";
 import { Response } from "express";
-import { ValidationResult } from "../../types/validationResult";
+import { ValidationResult } from "../../types/validation-result";
 
 export const showValidationError = (
 	validationResult: ValidationResult,

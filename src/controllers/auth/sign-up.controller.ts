@@ -3,8 +3,8 @@ import { StatusCodes } from "http-status-codes";
 import { signUpValidationSchema } from "../../schemas/user.schema";
 import { UserModel } from "../../models/user.model";
 import { hash } from "bcrypt";
-import { validateAndRespond } from "../../utils/validateAndRespond/validateAndRespond";
-import { internalServerErrorMessage } from "../../utils/internalServerErrorMessage";
+import { validateAndRespond } from "../../utils/validate-and-respond/validate-and-respond";
+import { internalServerErrorMessage } from "../../utils/internal-server-error-message";
 
 export const signUp = async (req: Request, res: Response) => {
 	try {
