@@ -3,8 +3,7 @@ import { Schema } from "mongoose";
 
 const maxLength = 255;
 
-const eventPayloadValidationSchema = Joi.object({
-	description: Joi.string().required(),
+const dayOfWeekReqParamsSchema = Joi.object({
 	dayOfWeek: Joi.string()
 		.valid(
 			"sunday",
@@ -17,6 +16,10 @@ const eventPayloadValidationSchema = Joi.object({
 		)
 		.insensitive()
 		.required(),
+});
+
+const eventPayloadValidationSchema = dayOfWeekReqParamsSchema.keys({
+	description: Joi.string().required(),
 });
 
 const eventSchema = new Schema({
@@ -37,4 +40,8 @@ const eventSchema = new Schema({
 	},
 });
 
-export { eventPayloadValidationSchema, eventSchema };
+export {
+	dayOfWeekReqParamsSchema,
+	eventPayloadValidationSchema,
+	eventSchema,
+};
