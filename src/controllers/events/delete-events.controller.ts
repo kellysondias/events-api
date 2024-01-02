@@ -20,7 +20,7 @@ export const deleteEvents = async (req: Request, res: Response) => {
 
 		const deletedEvents = await EventModel.find({
 			dayOfWeek,
-		}).lean();
+		});
 
 		await EventModel.deleteMany({ dayOfWeek });
 
