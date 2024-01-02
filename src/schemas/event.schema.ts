@@ -14,8 +14,7 @@ const dayOfWeekReqParamsSchema = Joi.object({
 			"friday",
 			"saturday",
 		)
-		.insensitive()
-		.required(),
+		.insensitive(),
 });
 
 const eventPayloadValidationSchema = dayOfWeekReqParamsSchema.keys({
