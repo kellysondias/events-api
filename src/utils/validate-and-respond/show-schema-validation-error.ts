@@ -2,7 +2,7 @@ import { StatusCodes } from "http-status-codes";
 import { Response } from "express";
 import { ValidationResult } from "../../types/validation-result";
 
-export const showValidationError = (
+export const showSchemaValidationError = (
 	validationResult: ValidationResult,
 	res: Response,
 ) => {
