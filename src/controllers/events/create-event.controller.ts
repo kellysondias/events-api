@@ -4,9 +4,20 @@ import { internalServerErrorMessage } from "../../utils/internalServerErrorMessa
 import { unauthorizedRes } from "./unauthorized-res";
 import { verify } from "jsonwebtoken";
 import { UserModel } from "../../models/user.model";
+import { eventPayloadValidationSchema } from "../../schemas/event.schema";
+import { EventModel } from "../../models/event.model";
+import { validateAndRespond } from "../../utils/validateAndRespond/validateAndRespond";
 
 export const createEvent = async (req: Request, res: Response) => {
 	try {
+		const validationError = validateAndRespond(
+			req.body,
+			eventPayloadValidationSchema,
+			res,
+		);
+
+		if (validationError) return validationError;
+
 		const token = req.headers.bearer!;
 
 		const decodedToken = verify(
@@ -23,14 +34,16 @@ export const createEvent = async (req: Request, res: Response) => {
 				.status(StatusCodes.UNAUTHORIZED)
 				.json(unauthorizedRes);
 
-		const event = req.body;
+		const payload = req.body;
 
-		const createdEvent = {
-			...event,
+		const newEvent = {
+			...payload,
 			userId: user.id,
 		};
 
-		res.status(StatusCodes.CREATED).json(createdEvent);
+		const event = await EventModel.create(newEvent);
+
+		res.status(StatusCodes.CREATED).json(event);
 	} catch (error) {
 		internalServerErrorMessage(error, res);
 	}

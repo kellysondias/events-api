@@ -6,7 +6,7 @@ import { UserModel } from "../../models/user.model";
 import { sign } from "jsonwebtoken";
 import { compare } from "bcrypt";
 import { internalServerErrorMessage } from "../../utils/internalServerErrorMessage";
-import IUser from "../../interfaces/user.interface";
+import { IUser } from "../../interfaces/user.interface";
 
 export const signIn = async (req: Request, res: Response) => {
 	try {
