@@ -3,7 +3,7 @@ import { showValidationError } from "./show-validation-error";
 import { Response } from "express";
 
 export const validateAndRespond = (
-	payload: Request,
+	payload: Request | object,
 	schema: Joi.ObjectSchema,
 	res: Response,
 ) => {
