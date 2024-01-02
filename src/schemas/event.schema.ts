@@ -36,6 +36,8 @@ const eventPayloadValidationSchema = dayOfWeekReqParamsSchema.keys({
 	description: Joi.string().required(),
 });
 
+const idSchema = Joi.string().length(24).hex();
+
 const eventSchema = new Schema({
 	description: {
 		type: String,
@@ -59,4 +61,5 @@ export {
 	eventPayloadValidationSchema,
 	dayOfWeekRequiredReqParamsSchema,
 	eventSchema,
+	idSchema
 };
