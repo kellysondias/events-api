@@ -3,7 +3,7 @@ import { StatusCodes } from "http-status-codes";
 import { unauthorizedRes } from "../controllers/events/unauthorized-res";
 import { verify } from "jsonwebtoken";
 import { UserModel } from "../models/user.model";
-import { internalServerErrorMessage } from "../utils/internal-server-error-message";
+import { internalServerErrorMessage } from "../utils/internal-server-error-message/internal-server-error-message";
 
 export const authenticateUser = async (
 	req: Request,

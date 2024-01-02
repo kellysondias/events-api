@@ -4,7 +4,7 @@ import { signUpValidationSchema } from "../../schemas/user.schema";
 import { UserModel } from "../../models/user.model";
 import { hash } from "bcrypt";
 import { validateAndRespond } from "../../utils/validate-and-respond/validate-and-respond";
-import { internalServerErrorMessage } from "../../utils/internal-server-error-message";
+import { internalServerErrorMessage } from "../../utils/internal-server-error-message/internal-server-error-message";
 
 export const signUp = async (req: Request, res: Response) => {
 	try {

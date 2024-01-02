@@ -5,7 +5,7 @@ import { signInValidationSchema } from "../../schemas/user.schema";
 import { UserModel } from "../../models/user.model";
 import { sign } from "jsonwebtoken";
 import { compare } from "bcrypt";
-import { internalServerErrorMessage } from "../../utils/internal-server-error-message";
+import { internalServerErrorMessage } from "../../utils/internal-server-error-message/internal-server-error-message";
 import { IUser } from "../../interfaces/user.interface";
 
 export const signIn = async (req: Request, res: Response) => {
