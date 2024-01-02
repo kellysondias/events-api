@@ -6,12 +6,6 @@ import { validateAndRespond } from "../../utils/validate-and-respond/validate-an
 import { EventModel } from "../../models/event.model";
 import { errorMessage } from "../../utils/error-message";
 
-/*
-
-			COLOCAR 404 SEU NOIAAAAAAAAAA
-
-*/
-
 export const getEvents = async (req: Request, res: Response) => {
 	try {
 		const validationError = validateAndRespond(
