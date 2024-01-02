@@ -3,12 +3,12 @@ import { StatusCodes } from "http-status-codes";
 import { signUp } from "../controllers/auth/sign-up.controller";
 import { UserModel } from "../models/user.model";
 import { hash } from "bcrypt";
-import { validateAndRespond } from "../utils/validateAndRespond/validateAndRespond";
+import { validateAndRespond } from "../utils/validate-and-respond/validate-and-respond";
 import { signInValidationSchema } from "../schemas/user.schema";
 
 jest.mock("bcrypt");
-jest.mock("../utils/validateAndRespond/validateAndRespond.ts");
-jest.mock("../utils/validateAndRespond/showValidationError.ts")
+jest.mock("../utils/validate-and-respond/validate-and-respond.ts");
+jest.mock("../utils/validate-and-respond/show-validation-error.ts");
 jest.mock("../schemas/user.schema");
 jest.mock("../models/user.model");
 jest.mock("express");
