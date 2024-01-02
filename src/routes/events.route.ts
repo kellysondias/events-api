@@ -1,6 +1,7 @@
 import { Router } from "express";
 import { createEvent } from "../controllers/events/create-event.controller";
 import { getEvents } from "../controllers/events/get-events.controller";
+import { deleteEvents } from "../controllers/events/delete-events.controller";
 
 const eventsRouter = Router();
 
@@ -8,7 +9,7 @@ eventsRouter
 	.route("/events")
 	.post(createEvent)
 	.get(getEvents)
-	.delete((_, res) => res.send("DELETE events route"));
+	.delete(deleteEvents);
 
 eventsRouter
 	.route("/events/:id")
