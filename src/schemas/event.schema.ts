@@ -17,6 +17,21 @@ const dayOfWeekReqParamsSchema = Joi.object({
 		.insensitive(),
 });
 
+const dayOfWeekRequiredReqParamsSchema = Joi.object({
+	dayOfWeek: Joi.string()
+		.valid(
+			"sunday",
+			"monday",
+			"tuesday",
+			"wednesday",
+			"thursday",
+			"friday",
+			"saturday",
+		)
+		.insensitive()
+		.required()
+});
+
 const eventPayloadValidationSchema = dayOfWeekReqParamsSchema.keys({
 	description: Joi.string().required(),
 });
@@ -42,5 +57,6 @@ const eventSchema = new Schema({
 export {
 	dayOfWeekReqParamsSchema,
 	eventPayloadValidationSchema,
+	dayOfWeekRequiredReqParamsSchema,
 	eventSchema,
 };
