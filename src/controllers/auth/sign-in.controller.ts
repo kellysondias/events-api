@@ -7,6 +7,7 @@ import { sign } from "jsonwebtoken";
 import { compare } from "bcrypt";
 import { internalServerErrorMessage } from "../../utils/internal-server-error-message";
 import { IUser } from "../../interfaces/user.interface";
+import { errorMessage } from "../../utils/error-message";
 
 export const signIn = async (req: Request, res: Response) => {
 	try {
@@ -52,11 +53,15 @@ export const signIn = async (req: Request, res: Response) => {
 		);
 
 		if (!passwordMatch) {
-			return res.status(StatusCodes.UNAUTHORIZED).json({
-				statusCode: 401,
-				error: "Unauthorized",
-				message: "invalid password",
-			});
+			return res
+				.status(StatusCodes.UNAUTHORIZED)
+				.json(
+					errorMessage(
+						401,
+						"Unauthorized",
+						"invalid password",
+					),
+				);
 		}
 
 		const token = sign(
