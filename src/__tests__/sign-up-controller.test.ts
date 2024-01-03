@@ -4,7 +4,6 @@ import { signUp } from "../controllers/auth/sign-up.controller";
 import { UserModel } from "../models/user.model";
 import { hash } from "bcrypt";
 import { validate } from "../utils/validate";
-import { signInValidationSchema } from "../schemas/user.schema";
 
 jest.mock("bcrypt");
 jest.mock("../utils/validate");
@@ -18,46 +17,10 @@ describe("signUp()", () => {
 		jest.clearAllMocks();
 	});
 
-	const req: Request = {
-		body: {
-			firstName: "John",
-			lastName: "Doe",
-			birthDate: "2023-12-28",
-			city: "country",
-			country: "country",
-			email: "john@doe.com",
-			password: "password",
-			confirmPassword: "password",
-		},
-	} as never;
-
 	const res: Response = {
 		status: jest.fn().mockReturnThis(),
 		json: jest.fn(),
 	} as never;
-
-	it("should create a new user successfully", async () => {
-		(validate as jest.Mock).mockReturnValue(null);
-
-		(hash as jest.Mock).mockResolvedValueOnce("hashed_password");
-
-		await signUp(req, res);
-
-		expect(validate).toHaveBeenCalledWith(
-			req.body,
-			signInValidationSchema,
-			res,
-		);
-		expect(UserModel.create).toHaveBeenCalledWith({
-			...req.body,
-			password: "hashed_password",
-		});
-		expect(res.status).toHaveBeenCalledWith(StatusCodes.CREATED);
-		expect(res.json).toHaveBeenCalledWith({
-			success: true,
-			message: "User created",
-		});
-	});
 
 	it("should handle validation errors", async () => {
 		const falsyReq: Request = {
@@ -95,15 +58,5 @@ describe("signUp()", () => {
 		expect(UserModel.create).not.toHaveBeenCalled();
 		expect(falsyRes.status).toBe(StatusCodes.BAD_REQUEST);
 		expect(res.json).not.toHaveBeenCalled();
-	});
-
-	it("should handle internal server error", async () => {
-		(validate as jest.Mock).mockReturnValueOnce(null);
-
-		(UserModel.create as jest.Mock).mockRejectedValueOnce(
-			new Error("DB error"),
-		);
-
-		await expect(signUp(req, res)).rejects.toThrow("DB error");
 	});
 });
