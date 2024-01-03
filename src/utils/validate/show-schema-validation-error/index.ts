@@ -11,7 +11,7 @@ export const showSchemaValidationError = (
 	let message = "";
 
 	for (const error of validationResult.error.details) {
-		resource += Format.resource(resource, error.path.join());
+		resource += Format.resource(resource, error.path);
 		message += Format.message(error.message);
 	}
 
