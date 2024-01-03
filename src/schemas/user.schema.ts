@@ -42,8 +42,8 @@ const signUpValidationSchema = Joi.object({
 		.required()
 		.messages({
 			"string.pattern.base":
-				"Password must contain at least one uppercase letter, six characters and one number",
-			"any.required": "Password is required",
+				"Password must contain at least one uppercase letter, six characters and one number.",
+			"any.required": "Password is required.",
 		}),
 	confirmPassword: Joi.string()
 		.valid(Joi.ref("password"))
