@@ -3,7 +3,7 @@ import { StatusCodes } from "http-status-codes";
 import * as Joi from "joi";
 import { EventModel } from "../../models/event.model";
 import { errorMessage } from "../../utils/error-message";
-import { internalServerErrorMessage } from "../../utils/internal-server-error-message/internal-server-error-message";
+import { internalServerErrorMessage } from "../../utils/internal-server-error-message";
 
 const idSchema = Joi.string().length(24).hex();
 

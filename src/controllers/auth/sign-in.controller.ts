@@ -1,16 +1,16 @@
 import { Request, Response } from "express";
 import { StatusCodes } from "http-status-codes";
-import { validateAndRespond } from "../../utils/validate-and-respond/validate-and-respond";
+import { validate } from "../../utils/validate";
 import { signInValidationSchema } from "../../schemas/user.schema";
 import { UserModel } from "../../models/user.model";
 import { sign } from "jsonwebtoken";
 import { compare } from "bcrypt";
-import { internalServerErrorMessage } from "../../utils/internal-server-error-message/internal-server-error-message";
+import { internalServerErrorMessage } from "../../utils/internal-server-error-message";
 import { IUser } from "../../interfaces/user.interface";
 
 export const signIn = async (req: Request, res: Response) => {
 	try {
-		const validationError = validateAndRespond(
+		const validationError = validate(
 			req.body,
 			signInValidationSchema,
 			res,

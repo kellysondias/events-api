@@ -3,12 +3,12 @@ import { StatusCodes } from "http-status-codes";
 import { signUp } from "../controllers/auth/sign-up.controller";
 import { UserModel } from "../models/user.model";
 import { hash } from "bcrypt";
-import { validateAndRespond } from "../utils/validate-and-respond/validate-and-respond";
+import { validate } from "../utils/validate";
 import { signInValidationSchema } from "../schemas/user.schema";
 
 jest.mock("bcrypt");
-jest.mock("../utils/validate-and-respond/validate-and-respond.ts");
-jest.mock("../utils/validate-and-respond/show-validation-error.ts");
+jest.mock("../utils/validate/");
+jest.mock("../utils/validate/show-validation-error.ts");
 jest.mock("../schemas/user.schema");
 jest.mock("../models/user.model");
 jest.mock("express");
@@ -37,13 +37,13 @@ describe("signUp()", () => {
 	} as never;
 
 	it("should create a new user successfully", async () => {
-		(validateAndRespond as jest.Mock).mockReturnValue(null);
+		(validate as jest.Mock).mockReturnValue(null);
 
 		(hash as jest.Mock).mockResolvedValueOnce("hashed_password");
 
 		await signUp(req, res);
 
-		expect(validateAndRespond).toHaveBeenCalledWith(
+		expect(validate).toHaveBeenCalledWith(
 			req.body,
 			signInValidationSchema,
 			res,
@@ -85,7 +85,7 @@ describe("signUp()", () => {
 			],
 		};
 
-		(validateAndRespond as jest.Mock).mockResolvedValueOnce(
+		(validate as jest.Mock).mockResolvedValueOnce(
 			validationError,
 		);
 
@@ -98,7 +98,7 @@ describe("signUp()", () => {
 	});
 
 	it("should handle internal server error", async () => {
-		(validateAndRespond as jest.Mock).mockReturnValueOnce(null);
+		(validate as jest.Mock).mockReturnValueOnce(null);
 
 		(UserModel.create as jest.Mock).mockRejectedValueOnce(
 			new Error("DB error"),
