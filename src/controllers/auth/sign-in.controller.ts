@@ -52,12 +52,6 @@ export const signIn = async (req: Request, res: Response) => {
 			(user as IUser).password,
 		);
 
-		// {
-		// 	statusCode: 401,
-		// 	error: "Unauthorized",
-		// 	message: "invalid password",
-		// }
-
 		if (!passwordMatch) {
 			return res
 				.status(StatusCodes.UNAUTHORIZED)
