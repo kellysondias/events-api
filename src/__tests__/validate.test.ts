@@ -38,6 +38,27 @@ describe("validate()", () => {
 		expect(mockResponse.json).not.toHaveBeenCalled();
 	});
 
+	it("Should not return null when validation fails", () => {
+		const invalidPayload = {
+			birthDate: "2023-12-28",
+			city: "string",
+			country: "string",
+			email: "john@doe.com",
+			password: "Password1",
+			confirmPassword: "Password1",
+		};
+		const result = validate(
+			invalidPayload,
+			schema,
+			mockResponse as Response,
+		);
+
+		expect(result).not.toBeNull();
+		expect(mockResponse.status).toHaveBeenCalledWith(
+			StatusCodes.BAD_REQUEST,
+		);
+	});
+
 	it("Should return errors for missing required fields", () => {
 		const fieldMissingPayload = {
 			birthDate: "2023-12-28",
