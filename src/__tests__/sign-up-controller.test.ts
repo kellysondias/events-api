@@ -7,7 +7,6 @@ import { validate } from "../utils/validate";
 
 jest.mock("bcrypt");
 jest.mock("../utils/validate");
-jest.mock("../utils/show-validation-error");
 jest.mock("../schemas/user.schema");
 jest.mock("../models/user.model");
 jest.mock("express");
