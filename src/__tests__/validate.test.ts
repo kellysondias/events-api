@@ -1,13 +1,18 @@
 import { validate } from "../utils/validate";
 import { Response } from "express";
 import { signUpValidationSchema } from "../schemas/user.schema";
-
-const mockResponse = {
-	status: jest.fn(),
-	json: jest.fn(),
-};
+import { StatusCodes } from "http-status-codes";
 
 describe("validate()", () => {
+	let mockResponse: Partial<Response>;
+
+	beforeEach(() => {
+		mockResponse = {
+			status: jest.fn().mockReturnThis(),
+			json: jest.fn(),
+		};
+	});
+
 	const payload = {
 		firstName: "string",
 		lastName: "string",
@@ -35,7 +40,7 @@ describe("validate()", () => {
 		const result = validate(
 			payload,
 			schema,
-			mockResponse as unknown as Response,
+			mockResponse as Response,
 		);
 
 		expect(result).toBeNull();
@@ -47,16 +52,18 @@ describe("validate()", () => {
 		const result = validate(
 			invalidPayload,
 			schema,
-			mockResponse as unknown as Response,
+			mockResponse as Response,
 		);
 
-		expect(result).toBeNull();
-		expect(mockResponse.status).toHaveBeenCalledWith(400);
+		expect(result).not.toBeNull();
+		expect(mockResponse.status).toHaveBeenCalledWith(
+			StatusCodes.BAD_REQUEST,
+		);
 		expect(mockResponse.json).toHaveBeenCalledWith({
 			type: "Validation error",
 			errors: {
 				resource: "'firstName'",
-				message: " First name is required.",
+				message: "First name is required. ",
 			},
 		});
 	});
