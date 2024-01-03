@@ -68,7 +68,7 @@ describe("validate()", () => {
 		});
 	});
 
-	it("Should return errors for invalid string length", () => {
+	it("Should return error for invalid string length", () => {
 		const invalidLength = 256;
 
 		const payloadWithInvalidLength = {
