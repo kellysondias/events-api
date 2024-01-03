@@ -2,7 +2,7 @@ import { Request, Response } from "express";
 import { StatusCodes } from "http-status-codes";
 import { errorMessage } from "../../utils/error-message";
 import { EventModel } from "../../models/event.model";
-import { internalServerErrorMessage } from "../../utils/internal-server-error-message/internal-server-error-message";
+import { internalServerErrorMessage } from "../../utils/internal-server-error-message";
 
 export const getEventById = async (req: Request, res: Response) => {
 	try {

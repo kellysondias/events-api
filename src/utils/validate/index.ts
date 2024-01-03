@@ -2,7 +2,7 @@ import Joi, { ObjectSchema } from "joi";
 import { showSchemaValidationError } from "./show-schema-validation-error";
 import { Request, Response } from "express";
 
-export const validateAndRespond = (
+export const validate = (
 	payload: Request | object,
 	schema: Joi.StringSchema<string> | ObjectSchema<unknown>,
 	res: Response,
