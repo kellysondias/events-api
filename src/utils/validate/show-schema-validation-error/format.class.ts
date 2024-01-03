@@ -4,6 +4,5 @@ export class Format {
 		path: (string | number)[] | string,
 	) => (resource && ", ") + `'${path}'`;
 
-	static message = (message: string) =>
-		(message && " ") + `${message}`;
+	static message = (message: string) => `${message} `;
 }
