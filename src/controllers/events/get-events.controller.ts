@@ -6,35 +6,38 @@ import { validate } from "../../utils/validate";
 import { EventModel } from "../../models/event.model";
 import { errorMessage } from "../../utils/error-message";
 
-export const getEvents = async (req: Request, res: Response) => {
-	try {
-		const validationError = validate(
-			req.query,
-			EventSchema.dayOfWeek.optional,
-			res,
-		);
+export class getEventsController {
+	static async get(req: Request, res: Response) {
+		try {
+			const validationError = validate(
+				req.query,
+				EventSchema.dayOfWeek.optional,
+				res,
+			);
 
-		validationError && validationError;
+			validationError && validationError;
 
-		const { dayOfWeek } = req.query;
+			const { dayOfWeek } = req.query;
 
-		let events = await EventModel.find({});
+			let events = await EventModel.find({});
 
-		if (dayOfWeek) events = await EventModel.find({ dayOfWeek });
+			if (dayOfWeek)
+				events = await EventModel.find({ dayOfWeek });
 
-		if (events.length === 0)
-			return res
-				.status(StatusCodes.NOT_FOUND)
-				.json(
-					errorMessage(
-						StatusCodes.NOT_FOUND,
-						"Not Found",
-						"Not Found",
-					),
-				);
+			if (events.length === 0)
+				return res
+					.status(StatusCodes.NOT_FOUND)
+					.json(
+						errorMessage(
+							StatusCodes.NOT_FOUND,
+							"Not Found",
+							"Not Found",
+						),
+					);
 
-		res.status(StatusCodes.OK).json(events);
-	} catch (error) {
-		internalServerErrorMessage(error, res);
+			res.status(StatusCodes.OK).json(events);
+		} catch (error) {
+			internalServerErrorMessage(error, res);
+		}
 	}
-};
+}
