@@ -1,7 +1,7 @@
 import { Router } from "express";
 import { CreateEventController } from "../controllers/events/create-event.controller";
 import { getEventsController } from "../controllers/events/get-events.controller";
-import { deleteEvents } from "../controllers/events/delete-events.controller";
+import { deleteEventsController } from "../controllers/events/delete-events.controller";
 import { getEventById } from "../controllers/events/get-event-by-id.controller";
 import { deleteEventById } from "../controllers/events/delete-event-by-id.controller";
 
@@ -11,7 +11,7 @@ eventsRouter
 	.route("/events")
 	.post(CreateEventController.create)
 	.get(getEventsController.get)
-	.delete(deleteEvents);
+	.delete(deleteEventsController.delete);
 
 eventsRouter
 	.route("/events/:id")
