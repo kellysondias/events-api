@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
 import { StatusCodes } from "http-status-codes";
 import { validate } from "../../utils/validate";
-import { signInValidationSchema } from "../../schemas/user.schema";
+import { UserSchema } from "../../schemas/user.schema";
 import { UserModel } from "../../models/user.model";
 import { sign } from "jsonwebtoken";
 import { compare } from "bcrypt";
@@ -13,7 +13,7 @@ export const signIn = async (req: Request, res: Response) => {
 	try {
 		const validationError = validate(
 			req.body,
-			signInValidationSchema,
+			UserSchema.signIn,
 			res,
 		);
 

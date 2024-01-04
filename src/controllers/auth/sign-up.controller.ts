@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 import { StatusCodes } from "http-status-codes";
-import { signUpValidationSchema } from "../../schemas/user.schema";
+import { UserSchema } from "../../schemas/user.schema";
 import { UserModel } from "../../models/user.model";
 import { hash } from "bcrypt";
 import { validate } from "../../utils/validate";
@@ -10,7 +10,7 @@ export const signUp = async (req: Request, res: Response) => {
 	try {
 		const validationError = validate(
 			req.body,
-			signUpValidationSchema,
+			UserSchema.signUp,
 			res,
 		);
 
