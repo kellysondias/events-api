@@ -1,15 +1,15 @@
 import { Request, Response } from "express";
 import { StatusCodes } from "http-status-codes";
 import { internalServerErrorMessage } from "../../utils/internal-server-error-message";
-import { eventPayloadValidationSchema } from "../../schemas/event.schema";
 import { EventModel } from "../../models/event.model";
 import { validate } from "../../utils/validate";
+import { EventSchema } from "../../schemas/event.schema";
 
 export const createEvent = async (req: Request, res: Response) => {
 	try {
 		const validationError = validate(
 			req.body,
-			eventPayloadValidationSchema,
+			EventSchema.payload,
 			res,
 		);
 
