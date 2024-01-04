@@ -1,0 +1,17 @@
+{
+	"compilerOptions": {
+		"target": "es2018",
+		"experimentalDecorators": true,
+		"module": "commonjs",
+		"moduleResolution": "node",
+		"resolveJsonModule": true,
+		"rootDir": "./src",
+		"outDir": "./dist",
+		"removeComments": true,
+		"esModuleInterop": true,
+		"forceConsistentCasingInFileNames": true,
+		"strict": true,
+	},
+	"include": ["src/**/*"],
+	"exclude": ["dist", "node_modules", "__tests__"]
+}
