@@ -2,7 +2,7 @@ import Joi from "joi";
 import { Schema } from "mongoose";
 import { MainSchema } from "./main-schema.class";
 
-class EventSchema extends MainSchema {
+export class EventSchema extends MainSchema {
 	static dayOfWeek = {
 		optional: Joi.object({
 			dayOfWeek: Joi.string()
@@ -70,5 +70,3 @@ class EventSchema extends MainSchema {
 		},
 	});
 }
-
-export { EventSchema };
