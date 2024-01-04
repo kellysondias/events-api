@@ -52,7 +52,7 @@ class EventSchema extends MainSchema {
 
 	static id = Joi.string().length(24).hex();
 
-	static eventSchema = new Schema({
+	static event = new Schema({
 		description: {
 			type: String,
 			required: true,
