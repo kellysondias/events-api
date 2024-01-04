@@ -1,24 +1,17 @@
-import { Request, Response } from "express";
-import { StatusCodes } from "http-status-codes";
-import { validate } from "../../utils/validate";
-import { UserSchema } from "../../schemas/user.schema";
-import { UserModel } from "../../models/user.model";
-import { sign } from "jsonwebtoken";
+import { IUser } from "../interfaces/user.interface";
+import { errorMessage } from "../utils/error-message";
 import { compare } from "bcrypt";
-import { internalServerErrorMessage } from "../../utils/internal-server-error-message";
-import { IUser } from "../../interfaces/user.interface";
-import { errorMessage } from "../../utils/error-message";
+import { UserModel } from "../models/user.model";
+import { StatusCodes } from "http-status-codes";
+import { internalServerErrorMessage } from "../utils/internal-server-error-message";
+import { NextFunction, Request, Response } from "express";
 
-export const signIn = async (req: Request, res: Response) => {
+export async function validateUserMiddleware(
+	req: Request,
+	res: Response,
+	next: NextFunction,
+) {
 	try {
-		const validationError = validate(
-			req.body,
-			UserSchema.signIn,
-			res,
-		);
-
-		if (validationError) return validationError;
-
 		const { email, password } = req.body;
 
 		const user = await UserModel.findOne({ email });
@@ -64,14 +57,10 @@ export const signIn = async (req: Request, res: Response) => {
 				);
 		}
 
-		const token = sign(
-			{ userId: user._id },
-			`${process.env.JWT_SECRET}`,
-			{ expiresIn: "30d" },
-		);
+		req.user = user;
 
-		res.status(StatusCodes.CREATED).json({ token });
+		next();
 	} catch (error) {
 		internalServerErrorMessage(error, res);
 	}
-};
+}

@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 import { StatusCodes } from "http-status-codes";
-import { signUp } from "../controllers/auth/sign-up.controller";
+import { SignUpController } from "../controllers/auth/sign-up.controller";
 import { UserModel } from "../models/user.model";
 import { hash } from "bcrypt";
 import { validate } from "../utils/validate";
@@ -11,7 +11,7 @@ jest.mock("../schemas/user.schema");
 jest.mock("../models/user.model");
 jest.mock("express");
 
-describe("signUp()", () => {
+describe("SignUpController()", () => {
 	beforeEach(() => {
 		jest.clearAllMocks();
 	});
@@ -51,7 +51,7 @@ describe("signUp()", () => {
 			validationError,
 		);
 
-		await signUp(falsyReq, falsyRes);
+		await SignUpController.signUp(falsyReq, falsyRes);
 
 		expect(hash).not.toHaveBeenCalled();
 		expect(UserModel.create).not.toHaveBeenCalled();
