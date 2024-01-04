@@ -1,6 +1,6 @@
 import { validate } from "../utils/validate";
 import { Response } from "express";
-import { signUpValidationSchema } from "../schemas/user.schema";
+import { UserSchema } from "../schemas/user.schema";
 import { StatusCodes } from "http-status-codes";
 
 describe("validate()", () => {
@@ -24,7 +24,7 @@ describe("validate()", () => {
 		confirmPassword: "Password1",
 	};
 
-	const schema = signUpValidationSchema;
+	const schema = UserSchema.signUp;
 
 	it("Should not return error for valid payload", () => {
 		const result = validate(
