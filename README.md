@@ -33,7 +33,7 @@
 
 ### Installation
 
-1. Clone the GitHub repository in the desired folder. You can do it by copying the https or ssh link or downloading the zip file:
+1. Clone the GitHub repository in the desired folder. You can do it by copying the https link, the ssh link or downloading the zip file:
    <img src="./public/img/screenshot_1.png">
 
 -   cloning with https link:
