@@ -15,8 +15,6 @@
         -   [<URL>events](#urlevents)
         -   [<URL>events/:id](#urleventsid)
 -   [Acknowledgments](#acknowledgments)
-    -   [Developers](#developers)
-    -   [Date](#date)
 
 ## Getting Started
 
@@ -67,7 +65,7 @@ cd path\of\your\cloned\folder
 
 ### Configuration
 
-1. Create a `.env` file on the root directory (in the same level as `package.json`). You can find a more practical example in the .env.example file.
+1. Create a `.env` file in the root directory (in the same level as `package.json`). You can find a more practical example in the .env.example file.
 
 <img src="./public/img/screenshot_2.png">
 
