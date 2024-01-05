@@ -135,7 +135,7 @@ And now the API should be officially running :] .
 #### `<URL>/users/sign-in`
 
 -   HTTP Methods
-    -   _POST_ (Signs-in a user generating a web token)
+    -   _POST_ (Signs-in an user generating a web token)
         -   Required fields:
             ```
             {
