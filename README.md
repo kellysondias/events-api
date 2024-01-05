@@ -197,6 +197,6 @@ And now the API should be officially running :] .
 #### Special thanks:
 
 -   <a href="https://github.com/SenhorAfonso/">Pedro Afonso</a>
--   <a href="https://www.linkedin.com/in/gilberto-medeiros/details/projects/">Gilberto Medeiros</a>
+-   <a href="https://github.com/GilbertosMedeiros">Gilberto Medeiros</a>
 -   <a href="https://github.com/paulorayann">Paulo Rayann</a>
 -   <a href="https://github.com/devrafamenegon">Rafael Henrique Menegon</a>
