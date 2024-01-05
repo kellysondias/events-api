@@ -6,17 +6,14 @@
     -   [Prerequisites](#prerequisites)
     -   [Installation](#installation)
     -   [Configuration](#configuration)
--   [Deployment](#deployment)
--   [API Endpoints](#api-endpoints)
+-   [Running the Server](#running-the-server)
+-   [Endpoints](#endpoints)
     -   [Users](#users)
         -   [<URL>users/sign-up](#urluserssign-up)
         -   [<URL>users/sign-in](#urluserssign-in)
     -   [Events](#events)
         -   [<URL>events](#urlevents)
         -   [<URL>events/:id](#urleventsid)
--   [Technical Details](#technical-details)
-    -   [Code Editor](#code-editor)
-    -   [Dependencies](#dependencies)
 -   [Acknowledgments](#acknowledgments)
     -   [Developers](#developers)
     -   [Date](#date)
@@ -94,7 +91,7 @@ PORT=<choose_a_port>
 JWT_SECRET=<your_secret>
 ```
 
-## Deployment
+## Running the Server
 
 After all this configuration is set and ready to go:
 
