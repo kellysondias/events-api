@@ -30,6 +30,7 @@
 
     -   <a href="https://classic.yarnpkg.com/lang/en/docs/install/#windows-stable">Yarn</a>
     -   npm
+- <a href="https://www.mongodb.com/cloud/atlas/register">MongoDB Atlas</a> account
 
 ### Installation
 
@@ -149,6 +150,8 @@ And now the API should be officially running :] .
             ```
 
 ### Events:
+
+**_Note:_** Every event route is only accessible through user's sign-in authentication
 
 #### `<URL>/events`
 
